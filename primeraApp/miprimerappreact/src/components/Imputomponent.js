@@ -6,7 +6,7 @@ export default class InputComponent extends Component{
         return(
             <div>
                 <input value={this.props.nombre} onChange={this.props.cambiarNombre}></input>
-            </div>
+            </div>/*asdsad*/ 
         )
     }
 
