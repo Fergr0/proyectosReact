@@ -2,6 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import HelloComponent from './components/HelloComponent';
 import { Component } from 'react';
+import InputComponent from './components/Imputomponent'
+
 
 class App extends Component {
 
