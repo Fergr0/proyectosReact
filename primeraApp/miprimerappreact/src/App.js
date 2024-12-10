@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import HelloComponent from './components/HelloComponent';
 import { Component } from 'react';
+import InputComponent from './components/Imputomponet';
 
 class App extends Component {
 
@@ -24,7 +25,7 @@ class App extends Component {
         <header className='App-header'>
           <img src={logo} className='App-logo' alt='logo'></img>
           <HelloComponent nombre = {this.state.name}></HelloComponent>
-          <input type='text' value={this.state.name} onChange={this.changeName}></input>
+          <InputComponent nombre = {this.state.name} cambiarNombre={this.changeName}></InputComponent>
         </header>
       </div>
     );
