@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import HeaderComponent from './components/HeaderComponent'
 import ButtonComponent from './components/ButtonComponent'
+import LoginComponent from './components/LoginComponent'
 
 function App() {
 
@@ -17,6 +18,13 @@ function App() {
     blog: "Blog",
     news: "Noticias",
     contact: "Contáctanos"
+  }
+  const [user, setUser] = useState({
+  })
+
+  const login = (userInfo) => {
+    console.log(userInfo)
+    setUser(userInfo)
   }
 
   const upOne = () =>{
@@ -39,7 +47,8 @@ function App() {
     <>
       <HeaderComponent greetings={greetings} links={links}></HeaderComponent>
       <main className='main-content'>
-        <h2 onClick={sayHello}>Hola a todos</h2>
+        <h2 onClick={sayHello}>Hola {user.username}</h2>
+        <LoginComponent ></LoginComponent>
         <h2 onClick={upOne}>Número: {number}</h2>
         <input value={myValue} type="text" onChange={handleChange} placeholder={myPlaceHolder} />
         <br></br>
