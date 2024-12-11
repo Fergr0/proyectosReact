@@ -1,0 +1,18 @@
+.header{
+    background-color: rgb(23, 63, 63);
+    color: white;
+    .title{
+        margin: 0;
+        padding: 20px;
+        text-align: center;
+    }
+    .header-list{
+        padding: 20px;
+        display: flex;
+        justify-content: space-around;
+        .link{
+            color: white;
+            text-decoration: none;
+        }
+    }
+}
