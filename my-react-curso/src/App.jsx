@@ -36,7 +36,7 @@ function App() {
   //   console.log("Ejecución con cada cambio de la variable reactiva user")
   // }, [user])
 
-  
+
 
 
 
@@ -72,7 +72,7 @@ function App() {
         }
         <LoginComponent handleLogin={login}></LoginComponent>
 
-        <button onClick={()=>{setShowMovies(!showMovies)}}>Mostrar películas</button>
+        {/* <button onClick={()=>{setShowMovies(!showMovies)}}>Mostrar películas</button>
 
         {
           condition && <h2>La condición se cumple</h2>
@@ -88,7 +88,7 @@ function App() {
         {
           showMovies && 
           <MovieListComponent></MovieListComponent>}
-        <AnimalListComponent></AnimalListComponent>
+        <AnimalListComponent></AnimalListComponent> */}
       </main>
     </>
   )
