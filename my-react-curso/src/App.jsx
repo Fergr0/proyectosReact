@@ -5,6 +5,8 @@ import './App.css'
 import HeaderComponent from './components/HeaderComponent'
 import ButtonComponent from './components/ButtonComponent'
 import LoginComponent from './components/LoginComponent'
+import MovieListComponent from './components/MovieListComponent'
+import AnimalListComponent from './components/AnimalListComponent'
 
 function App() {
 
@@ -66,6 +68,8 @@ function App() {
           (<h2>No se cumple con ternario</h2>)
         }
 
+        <MovieListComponent></MovieListComponent>
+        <AnimalListComponent></AnimalListComponent>
       </main>
     </>
   )
