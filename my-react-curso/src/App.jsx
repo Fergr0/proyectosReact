@@ -19,6 +19,9 @@ function App() {
     news: "Noticias",
     contact: "Contáctanos"
   }
+
+  const condition = true;
+
   const [user, setUser] = useState({
   })
 
@@ -47,13 +50,22 @@ function App() {
     <>
       <HeaderComponent greetings={greetings} links={links}></HeaderComponent>
       <main className='main-content'>
-        <h2 onClick={sayHello}>Hola {user.username}</h2>
+        {
+          user.username && <h2 onClick={sayHello}>Hola {user.username}</h2>
+        }
         <LoginComponent handleLogin={login}></LoginComponent>
-        <h2 onClick={upOne}>Número: {number}</h2>
-        <input value={myValue} type="text" onChange={handleChange} placeholder={myPlaceHolder} />
-        <br></br>
-        <br></br>
-        <ButtonComponent></ButtonComponent>
+
+        {
+          condition && <h2>La condición se cumple</h2>
+        }
+        {
+          !condition && <h2>La condición no se cumple</h2>
+        }
+        {
+          condition ? (<h2>Se cumple con ternario</h2>):
+          (<h2>No se cumple con ternario</h2>)
+        }
+
       </main>
     </>
   )
