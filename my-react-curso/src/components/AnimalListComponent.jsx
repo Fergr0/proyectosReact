@@ -1,4 +1,3 @@
-import perro from '../assets/perro.jpeg'
 
 function AnimalListComponent() {
     const animals = [

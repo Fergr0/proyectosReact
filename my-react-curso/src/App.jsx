@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -9,6 +9,7 @@ import MovieListComponent from './components/MovieListComponent'
 import AnimalListComponent from './components/AnimalListComponent'
 
 function App() {
+
 
   // let number = 0;
   const [number, setNumber] = useState(0)
@@ -27,10 +28,24 @@ function App() {
   const [user, setUser] = useState({
   })
 
+  // useEffect(()=>{
+  //   console.log("Ejecución cada vez que se renderiza el componente raiz")
+  // })
+
+  // useEffect(()=>{
+  //   console.log("Ejecución con cada cambio de la variable reactiva user")
+  // }, [user])
+
+  
+
+
+
   const login = (userInfo) => {
     console.log(userInfo)
     setUser(userInfo)
   }
+
+  const [showMovies, setShowMovies] = useState(true)
 
   const upOne = () =>{
     // number++;
@@ -57,6 +72,8 @@ function App() {
         }
         <LoginComponent handleLogin={login}></LoginComponent>
 
+        <button onClick={()=>{setShowMovies(!showMovies)}}>Mostrar películas</button>
+
         {
           condition && <h2>La condición se cumple</h2>
         }
@@ -68,7 +85,9 @@ function App() {
           (<h2>No se cumple con ternario</h2>)
         }
 
-        <MovieListComponent></MovieListComponent>
+        {
+          showMovies && 
+          <MovieListComponent></MovieListComponent>}
         <AnimalListComponent></AnimalListComponent>
       </main>
     </>
