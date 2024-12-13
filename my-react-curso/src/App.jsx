@@ -48,7 +48,7 @@ function App() {
       <HeaderComponent greetings={greetings} links={links}></HeaderComponent>
       <main className='main-content'>
         <h2 onClick={sayHello}>Hola {user.username}</h2>
-        <LoginComponent ></LoginComponent>
+        <LoginComponent handleLogin={login}></LoginComponent>
         <h2 onClick={upOne}>Número: {number}</h2>
         <input value={myValue} type="text" onChange={handleChange} placeholder={myPlaceHolder} />
         <br></br>

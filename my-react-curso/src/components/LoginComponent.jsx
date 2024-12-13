@@ -5,13 +5,15 @@ function login(props) {
         username: "Fer",
         mail: "fergr01bbx@gmail.com"
     }
+
     const handleClick = () => {
-        
+      props.handleLogin(user)
     }
+
   return (
     <section>
         <h2>Sección Login</h2>
-        <button onClick={}></button>
+        <button onClick={handleClick}>Login</button>
     </section>
   )
 }
