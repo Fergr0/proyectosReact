@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import PokemonCardComponent from "./PokemonCardComponent"
 import "./PokemonList.css";
+import GetFormComponent from "./GetFormComponent";
 
 
-function PokemonListComponent() {
+function PokemonListComponent(props) {
 
     const [pokemons, setPokemons] = useState([]);
 
+
     useEffect(()=>{
-        getPokemons(20);
+        getPokemons(1, 20);
     }, [])
 
     const fetchPokemon = async(index) =>{
@@ -17,9 +19,9 @@ function PokemonListComponent() {
         return data;
     }
 
-    const getPokemons = async(quantity) =>{
+    const getPokemons = async(from, to) =>{
         const pokemonArr = [];
-        for(let i = 1; i<= quantity; i++){
+        for(let i = from; i<= to; i++){
             const pokemon = await fetchPokemon(i);
             pokemonArr.push(pokemon);
         }
@@ -29,13 +31,18 @@ function PokemonListComponent() {
     }
 
     const HTMLPokemon = pokemons.map((pokemon)=>{
-        return <PokemonCardComponent key={pokemon.id} pokemon = {pokemon}></PokemonCardComponent>
+        return <PokemonCardComponent key={pokemon.id} pokemon = {pokemon} selectedPokemon={props.selectedPokemon}></PokemonCardComponent>
     })
 
   return (
-    <ul className="pokemon-list">
-        {HTMLPokemon }
-    </ul>
+    <div>
+        <GetFormComponent getPokemons = {getPokemons}></GetFormComponent>
+
+        <ul className="pokemon-list">
+            {HTMLPokemon}
+        </ul>
+    </div>
+
   )
 }
 
