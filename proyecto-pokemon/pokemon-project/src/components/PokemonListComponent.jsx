@@ -8,7 +8,7 @@ function PokemonListComponent() {
     const [pokemons, setPokemons] = useState([]);
 
     useEffect(()=>{
-        getPokemons(10);
+        getPokemons(20);
     }, [])
 
     const fetchPokemon = async(index) =>{
