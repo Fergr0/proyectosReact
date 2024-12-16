@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import PokemonCardComponent from "./PokemonCardComponent"
 import "./PokemonList.css";
 import GetFormComponent from "./GetFormComponent";
+import { PokemonContext } from "../context/Pokemon.context";
 
 
 function PokemonListComponent(props) {
 
-    const [pokemons, setPokemons] = useState([]);
+    const { pokemons, setPokemons} = useContext(PokemonContext); //esta variable la cogemos del contexto, por lo que es global
 
 
     useEffect(()=>{
@@ -31,7 +32,7 @@ function PokemonListComponent(props) {
     }
 
     const HTMLPokemon = pokemons.map((pokemon)=>{
-        return <PokemonCardComponent key={pokemon.id} pokemon = {pokemon} selectedPokemon={props.selectedPokemon}></PokemonCardComponent>
+        return <PokemonCardComponent key={pokemon.id} pokemon = {pokemon} selectedPokemon={props.selectedPokemon} selectedPokemon2 = {props.selectedPokemon2}></PokemonCardComponent>
     })
 
   return (
