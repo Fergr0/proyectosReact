@@ -11,4 +11,4 @@ function DetailsWrapper(props){
 
 }
 
-export default DetailsWrapper
+export default DetailsWrapper;
