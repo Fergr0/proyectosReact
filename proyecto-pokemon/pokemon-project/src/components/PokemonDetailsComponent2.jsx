@@ -21,4 +21,4 @@ function PokemonDetailsCOmponent2(props) {
   )
 }
 
-export default DetailsWrapper(PokemonDetailsCOmponent2)
+export default PokemonDetailsCOmponent2
