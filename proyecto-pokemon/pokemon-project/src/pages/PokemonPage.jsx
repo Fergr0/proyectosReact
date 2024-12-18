@@ -1,11 +1,17 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import PokemonListComponent from '../components/PokemonListComponent'
 import PokemonDetailsComponent from '../components/PokemonDetailsComponent'
 import PokemonDetailsComponent2 from '../components/PokemonDetailsComponent2'
 import DetailsWrapper from '../hoc/DetailsWrapper'
+import {Navigate} from 'react-router-dom'
+import { UserContext } from '../context/User.context'
 
 function PokemonPage() {
     const [count, setCount] = useState(0)
+
+    const {user} = useContext(UserContext);
+
+    if(!user.isLoggedIn) return <Navigate to={"/error"}/>
 
     const [selectedPokemon, setSelectedPokemon] = useState()
     const [selectedPokemon2, setSelectedPokemon2] = useState()
