@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function Tabla() {
+function Tabla(props) {
+
+  
+
+    // Función para añadir una nueva canción al estado
+    const addSong = (newArtist,newSong, newLyric) => {
+      setCanciones(prevCanciones => [...prevCanciones, newArtist,newSong,newLyric]);
+    };
+
   return (
     <section className="py-4">
       <div className="container">
@@ -16,11 +24,15 @@ function Tabla() {
             </thead>
             <tbody>
                 {/* Por cada peticion, se anadiria un tr */}
-              <tr>
-                <td>Grupo 1</td>
-                <td>Canción 1</td>
-                <td>Letra 1</td>
-              </tr>
+                {props.canciones.map((cancion, index) => (
+                <tr key={index}>
+                  <td>{cancion[0]}</td>
+                  <td>{cancion[1]}</td>
+                  <td>
+                    <pre style={{ whiteSpace: "pre-wrap" }}>{cancion[2]}</pre>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

@@ -1,12 +1,19 @@
 import React, { useState } from 'react'
 
-function buscador(props) {
+function BuscadorV2(props) {
+const [localGroup, setLocalGroup] = useState("")
+  const [localSong, setLocalSong] = useState("")
+  const [isLoading, setIsLoading] = useState(false);
 
-  const searchLirycs = async (event, group, song) => {
+  const searchLirycs = async (event) => {
     event.preventDefault()
-    setGroup(group)
-    setSong(song)
-    llamadaApi(group, song)
+    props.setGroup(localGroup)
+    props.setSong(localSong)
+    setIsLoading(true);
+    setTimeout(() => {props.llamadaApi(localGroup, localSong)
+                    setIsLoading(false)
+    }, 2000);
+    
   }
 
   return (
@@ -20,6 +27,8 @@ function buscador(props) {
                   id="grupo"
                   className="form-control"
                   placeholder="Metallica"
+                  value={localGroup}
+                  onChange={(e) => setLocalGroup(e.target.value)}
                 />
         </div>
         <div className="mb-3">
@@ -29,12 +38,14 @@ function buscador(props) {
                   id="cancion"
                   className="form-control"
                   placeholder="One"
+                  value={localSong}
+                  onChange={(e)=>{setLocalSong(e.target.value)}}
                 />
         
         </div>
         <div className="d-grid">
                 <button type="submit" className="btn btn-primary">
-                  Buscar
+                  {isLoading ? "Buscando" : "Buscar"}
                 </button>
         </div>
         </form>
@@ -43,4 +54,4 @@ function buscador(props) {
   )
 }
 
-export default buscador
+export default BuscadorV2
