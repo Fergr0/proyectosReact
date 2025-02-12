@@ -8,42 +8,42 @@ const navItems = [
   { icon: "login", label: "SignIn", path: "/logIn" },
   { icon: "visibility", label: "Ver Contactos", path: "/prueba" },
   { icon: "help", label: "Ayuda", path: "/help" },
+  { icon: "add", label: "Añadir", path: "/anadir" },
+  { icon: "delete", label: "Borrar", path: "/borrar" },
+
 ];
 
 export const Sidebar3 = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <section
-      className="page sidebar-3-page"
-      style={{ backgroundImage: `url(${background})` }}
-    >
+    <>
+      {/* Botón de la hamburguesa */}
+      <button 
+        type="button" 
+        className="sidebar-3-burger" 
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span className="material-symbols-outlined">
+          {isOpen ? "close" : "menu"}
+        </span>
+      </button>
+
+      {/* Sidebar */}
       <aside className={`sidebar-3 ${isOpen ? "open" : ""}`}>
-        <div className="inner">
-          <header>
-            <button
-              type="button"
-              className="sidebar-3-burger"
-              onClick={() => setIsOpen(!isOpen)}
+        <nav>
+          {navItems.map(({ icon, label, path }) => (
+            <NavLink 
+              key={icon} 
+              to={path} 
+              className={({ isActive }) => isActive ? "active-link" : ""}
+              onClick={() => setIsOpen(false)} // Cierra la sidebar al hacer clic en un enlace
             >
-              <span className="material-symbols-outlined">
-                {isOpen ? "close" : "menu"}
-              </span>
-            </button>
-          </header>
-          <nav>
-            {navItems.map(({ icon, label, path }) => (
-              <NavLink 
-                key={icon} 
-                to={path} 
-                className={({ isActive }) => isActive ? "active-link" : ""}
-              >
-                <span className="material-symbols-outlined">{icon}</span>
-                <p className="nav-text">{label}</p>
-              </NavLink>
-            ))}
-          </nav>
-        </div>
+              <span className="material-symbols-outlined">{icon}</span>
+              <p>{label}</p>
+            </NavLink>
+          ))}
+        </nav>
       </aside>
-    </section>
+    </>
   );
 };

@@ -1,122 +1,83 @@
 /* styles.css */
 .page.sidebar-3-page {
-    background: #17132a url("./bg.jpeg");
-    background-size: cover;
-    position: relative;
-    min-height: 100vh;
-  }
-  
-  .page.sidebar-3-page::after {
-    content: "";
-    position: fixed;
-    z-index: 0;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.15);
-  }
-  
-  .sidebar-3 {
-    position: absolute;
-    z-index: 2;
-    top: 20px;
-    left: 20px;
-    bottom: 20px;
-    border-radius: 8px;
-    width: 56px;
-    background: rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(10px);
-    transition: width 0.45s;
-    overflow: hidden;
-  }
-  
-  .sidebar-3 button {
-    border: 0;
-    background: transparent;
-    cursor: pointer;
-  }
-  
-  .sidebar-3 .material-symbols-outlined {
-    font-size: 20px;
-    color: white;
-  }
-  
-  .sidebar-3.open {
-    width: 200px;
-  }
-  
-  .sidebar-3 .inner {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 200px;
-  }
-  
-  .sidebar-3 header {
-    display: flex;
-    align-items: center;
-    height: 64px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    padding: 0 6px;
-  }
-  
-  .sidebar-3-burger {
-    width: 44px;
-    height: 72px;
-    display: grid;
-    place-items: center;
-    color: #f9f9f9;
-  }
-  
-  .sidebar-3 nav {
-    display: flex;
-    flex-direction: column;
-    padding: 0 6px;
-    gap: 4px;
-  }
-  
-  nav a {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px;
-    color: white;
-    border-radius: 8px;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  
-  nav a:hover {
-    background: rgba(255, 255, 255, 0.2);
-  }
-  
-  .active-link {
-    background: rgba(255, 255, 255, 0.3);
-  }
-  
-  .nav-text {
-    flex-grow: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .sidebar-3:not(.open) .nav-text {
-    display: none;
-  }
-
-
-  .app-container {
-  display: flex;
-  height: 100vh;
+  background: #17132a url("./bg.jpeg");
+  background-size: cover;
+  position: relative;
+  min-height: 100vh;
 }
 
 .sidebar-3 {
+  position: fixed;
+  left: -200px; /* Oculta la sidebar inicialmente */
+  top: 0;
+  bottom: 0;
   width: 200px;
-  flex-shrink: 0;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6); /* Solo visible cuando esté abierta */
+  backdrop-filter: blur(10px);
+  transition: left 0.3s ease-in-out;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }
 
-.content {
+.sidebar-3.open {
+  left: 0; /* Desliza la sidebar al abrir */
+}
+
+.sidebar-3-burger {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: white;
+  z-index: 1000;
+}
+
+.sidebar-3 nav {
+  width: 100%;
+  margin-top: 60px; /* Desplaza los elementos hacia abajo */
+}
+
+.nav-items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar-3 a {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  transition: background 0.3s ease-in-out;
+  border-radius: 8px;
+}
+
+.sidebar-3 a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.active-link {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.nav-text {
   flex-grow: 1;
-  padding: 20px;
-  overflow-y: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-3:not(.open) .nav-text {
+  display: none;
+}
+
+.app-container {
+display: flex;
+height: 100vh;
 }

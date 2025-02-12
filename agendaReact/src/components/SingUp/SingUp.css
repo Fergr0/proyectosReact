@@ -5,58 +5,60 @@
     align-items: center;
     min-height: 100vh;
     padding: 20px;
-    background: linear-gradient(to bottom, #17132a, #3a3a52); /* Fondo con degradado */
+    background: linear-gradient(to bottom, #17132a, #3a3a52);
+    width: 100%; /* Asegurar que ocupa todo el espacio disponible */
 }
 
 /* ======== FORMULARIO ======== */
 .auth-card {
     width: 100%;
-    max-width: 450px; /* Ajusta el ancho máximo */
+    max-width: 600px;
     background: white;
-    padding: 25px;
+    padding: 30px;
     border-radius: 12px;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
     text-align: center;
+    margin: auto; /* Centrar horizontalmente */
 }
 
 .auth-card h3 {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 700;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     color: #333;
 }
 
 /* ======== CAMPOS DEL FORMULARIO ======== */
 .auth-form .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     text-align: left;
 }
 
 .auth-form label {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     color: #333;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     display: block;
 }
 
 .auth-form input {
     width: 100%;
-    padding: 10px;
-    border-radius: 6px;
+    padding: 12px;
+    border-radius: 8px;
     border: 1px solid #ccc;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 /* ======== BOTÓN ======== */
 .auth-btn {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     background-color: #3a3a52;
     color: white;
-    font-size: 16px;
+    font-size: 18px;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     transition: background 0.3s ease-in-out;
 }
@@ -67,8 +69,8 @@
 
 /* ======== TEXTO DE ENLACE ======== */
 .auth-footer {
-    margin-top: 15px;
-    font-size: 14px;
+    margin-top: 20px;
+    font-size: 16px;
 }
 
 .auth-footer a {
