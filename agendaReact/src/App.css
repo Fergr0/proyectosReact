@@ -1,0 +1,21 @@
+.app-container {
+    display: flex;
+    height: 100vh;
+    background: linear-gradient(to bottom, #17132a, #3a3a52); /* Ajusta el fondo */
+    background-size: cover;
+    background-position: center;
+}
+
+.content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background: url('./bg.jpeg') no-repeat center center fixed;
+    background-size: cover;
+}
