@@ -1,26 +1,28 @@
 // src/firebase.js
 
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";  // Cambio en la importación de auth
+import { getAuth } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import { getStorage } from "firebase/storage"; // 🔹 Importamos Storage
 
-// Configuración de Firebase
+// 🔹 Configuración de Firebase (CORRIGE el `storageBucket`)
 const firebaseConfig = {
   apiKey: "AIzaSyBjtMXdCx8kVPsEjsBiForCiSy0BDhH0oA",
   authDomain: "agendareact-6b1df.firebaseapp.com",
   projectId: "agendareact-6b1df",
-  storageBucket: "agendareact-6b1df.firebasestorage.app",
+  storageBucket: "agendareact-6b1df.appspot.com", // 🔹 Corregido
   messagingSenderId: "185241877806",
   appId: "1:185241877806:web:85f367db0c0134970a4ebf",
   measurementId: "G-WPW7RZRWYE"
 };
 
-// Inicializar Firebase
+// 🔹 Inicializar Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);  // Obtén auth usando getAuth
-const firestore = getFirestore(app);  // Obtén firestore usando getFirestore
+const auth = getAuth(app);
+const firestore = getFirestore(app);
+const storage = getStorage(app); // 🔹 Inicializar Firebase Storage
 
-// Función para generar documento de usuario en Firestore
+// 🔹 Función para generar documento de usuario en Firestore
 export const generateUserDocument = async (user, additionalData) => {
   if (!user) return;
 
@@ -33,7 +35,7 @@ export const generateUserDocument = async (user, additionalData) => {
       await setDoc(userRef, {
         displayName,
         email,
-        photoURL,
+        photoURL: photoURL || null, // 🔹 Asegurar que `photoURL` no sea `undefined`
         ...additionalData
       });
     } catch (error) {
@@ -44,7 +46,7 @@ export const generateUserDocument = async (user, additionalData) => {
   return getUserDocument(user.uid);
 };
 
-// Función para obtener el documento del usuario
+// 🔹 Función para obtener el documento del usuario
 const getUserDocument = async (uid) => {
   if (!uid) return null;
 
@@ -64,4 +66,5 @@ const getUserDocument = async (uid) => {
   }
 };
 
-export { auth, firestore };
+// 🔹 Exportar `storage` para poder usarlo en otros componentes
+export { auth, firestore, storage };
