@@ -6,12 +6,13 @@ import { useNavigate } from "react-router-dom";
 
 function SignUpComponent() { 
 
-  const auth = useAuth();
+  const { user, signUp } = useAuth();
   const [emailRegister, setEmailRegister] = useState("");
   const [passwordRegister, setPasswordRegister] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [photoURL, setPhotoURL] = useState("");
   const navigate = useNavigate();
+  const isAuthenticated = user !== null; // Verificamos si el usuario está autenticado
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -34,6 +35,14 @@ function SignUpComponent() {
   };
 
   return (
+    isAuthenticated ? (
+      <div className="auth-container">
+        <div className="auth-card">
+          <h3>Ya has iniciado sesión</h3>
+          <p>Para registrate, primero cierra sesión</p>
+        </div>
+      </div>
+      ) : (
     <div className="auth-container">
       <div className="auth-card">
         <h3>Registro</h3>
@@ -92,7 +101,7 @@ function SignUpComponent() {
           <p>¿Ya tienes cuenta? <a href="/login">Inicia sesión</a></p>
         </div>
       </div>
-    </div>
+    </div>)
   );
 }
 

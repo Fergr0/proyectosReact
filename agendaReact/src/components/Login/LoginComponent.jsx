@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { auth } from "../../firebase.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/authContext";
 // import "Login.css"
 
 function LoginComponent() {
@@ -9,6 +10,8 @@ function LoginComponent() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const isAuthenticated = user !== null; // Verificamos si el usuario está autenticado
 
   const login = async (event) => {
     event.preventDefault();
@@ -22,6 +25,14 @@ function LoginComponent() {
   };
 
   return (
+    isAuthenticated ? (
+      <div className="auth-container">
+        <div className="auth-card">
+          <h3>Ya has iniciado sesión</h3>
+          <p>Para iniciar sesión, primero cierra sesión</p>
+        </div>
+      </div>
+    ): (
     <div className="auth-container">
       <div className="auth-card">
         <h3>Iniciar Sesión</h3>
@@ -58,7 +69,7 @@ function LoginComponent() {
           <p>¿No tienes cuenta? <a href="/">Regístrate</a></p>
         </div>
       </div>
-    </div>
+    </div>)
   );
 }
 
