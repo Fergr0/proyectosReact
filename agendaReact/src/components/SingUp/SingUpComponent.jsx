@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { generateUserDocument } from "../../firebase.js"; // No es necesario importar `auth` aquí
+import { generateUserDocument } from "../../firebase.js";
 import { useAuth } from "../../context/authContext";
 import "./SingUp.css";
 import { useNavigate } from "react-router-dom";
