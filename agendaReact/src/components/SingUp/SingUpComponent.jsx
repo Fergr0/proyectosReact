@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 function SignUpComponent() { 
 
-  const { user, signUp } = useAuth();
+  const { user, signUp } = useAuth(); //Ser recoje solo lo que necesitamos del contexto, si ponemos const auth = useAuth(); nos traerá todo el contexto como un objeto
   const [emailRegister, setEmailRegister] = useState("");
   const [passwordRegister, setPasswordRegister] = useState("");
   const [displayName, setDisplayName] = useState("");
