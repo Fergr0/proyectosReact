@@ -1,41 +1,43 @@
 import React, { useState } from "react";
-import { auth, generateUserDocument } from "../../firebase.js";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { generateUserDocument } from "../../firebase.js"; // No es necesario importar `auth` aquí
+import { useAuth } from "../../context/authContext";
+import "./SingUp.css";
 import { useNavigate } from "react-router-dom";
-import "./SingUp.css"
 
-function SignUpComponent() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+function SignUpComponent() { 
+
+  const auth = useAuth();
+  const [emailRegister, setEmailRegister] = useState("");
+  const [passwordRegister, setPasswordRegister] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [photoURL, setPhotoURL] = useState("");
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const signUp = async (event) => {
-    event.preventDefault();
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
     try {
-      const { user } = await createUserWithEmailAndPassword(auth, email, password);
+      const user = await auth.signUp(emailRegister, passwordRegister);
+      if (!user) {
+        console.error("No se pudo registrar el usuario.");
+        return;
+      }
+
+      console.log("Usuario registrado:", user);
+
       await generateUserDocument(user, { displayName, photoURL });
-
-      setEmail("");
-      setPassword("");
-      setDisplayName("");
-      setPhotoURL("");
-
-      navigate("/login");
+      console.log("Documento de usuario generado en Firestore.");
     } catch (error) {
-      setError("Error al registrarse. Inténtalo de nuevo.");
-      console.error(error.message);
+      console.error("Error en el registro:", error.message);
     }
+    navigate("/login");
   };
 
   return (
     <div className="auth-container">
       <div className="auth-card">
         <h3>Registro</h3>
-        {error && <p className="text-danger">{error}</p>}
-        <form className="auth-form" onSubmit={signUp}>
+        <form className="auth-form" onSubmit={handleRegister}>
           <div className="form-group">
             <label htmlFor="displayName">Nombre</label>
             <input 
@@ -54,8 +56,8 @@ function SignUpComponent() {
               type="email" 
               id="email" 
               placeholder="Ingresa tu correo" 
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={emailRegister}
+              onChange={(e) => setEmailRegister(e.target.value)}
               required 
             />
           </div>
@@ -66,8 +68,8 @@ function SignUpComponent() {
               type="password" 
               id="password" 
               placeholder="Ingresa tu contraseña" 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={passwordRegister}
+              onChange={(e) => setPasswordRegister(e.target.value)}
               required 
             />
           </div>

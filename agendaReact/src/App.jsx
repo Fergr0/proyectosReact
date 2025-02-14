@@ -4,12 +4,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import SignUpComponent from "./components/SingUp/SingUpComponent";
 import LoginComponent from "./components/Login/LoginComponent";
 import PruebaComponent from "./components/PruebaComponent";
-import UserProvider from "./providers/UserProvider";
 import Layout from "./components/Layout";
+import { AuthProvider } from "./context/authContext";
 
 function App() {
   return (
-    <UserProvider>
+    <AuthProvider>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<SignUpComponent />} />
@@ -18,7 +18,7 @@ function App() {
           <Route path="prueba" element={<PruebaComponent />} />
         </Route>
       </Routes>
-    </UserProvider>
+    </AuthProvider>
   );
 }
 
