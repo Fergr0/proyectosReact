@@ -1,8 +1,9 @@
-import { auth } from "../firebase";
+import { auth, firestore } from "../firebase";
 import { createContext, useContext, useState, useEffect } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import { doc, setDoc, getDoc } from "firebase/firestore"; // Importamos las funciones necesarias para Firestore
 
-export const authContext = createContext();
+export const authContext = createContext();//Se crea el contexto
 
 export const useAuth = () => { 
   const context = useContext(authContext);
@@ -47,17 +48,20 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const signUp = async (email, password) => {
+  const signUp = async (email, password, displayName, photoURL) => {
     try {
       const response = await createUserWithEmailAndPassword(auth, email, password);
+      const newUser = response.user;
+      console.log(response, "holaaaaa")
 
       const userDoc = {
-        uid: response.user.uid,
-        email,
+        uid: newUser.uid,
+        email: newUser.email,
         displayName: displayName || "Usuario",
         photoURL: photoURL || "https://via.placeholder.com/100",
       };
-      await setDoc(doc(firestore, "users", response.user.uid), userDoc);
+      await setDoc(doc(firestore, "users", newUser.uid), userDoc);
+      
       setUser(response.user); // Se actualiza el estado después de registrarse
       return response.user;
     } catch (error) {
@@ -65,6 +69,7 @@ export function AuthProvider({ children }) {
       return null;
     }
   };
+
 
   const login = async (email, password) => {
     try {
