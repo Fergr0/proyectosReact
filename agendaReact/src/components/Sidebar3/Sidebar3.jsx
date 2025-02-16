@@ -6,7 +6,7 @@ import { useAuth } from "../../context/authContext";
 const navItems = [
   { icon: "person_add", label: "SignUp", path: "/signUp", requiresAuth: false },
   { icon: "login", label: "SignIn", path: "/logIn", requiresAuth: false },
-  { icon: "visibility", label: "Ver Contactos", path: "/prueba" },
+  { icon: "visibility", label: "Ver Contactos", path: "/ver" },
   { icon: "help", label: "Ayuda", path: "/help" },
   { icon: "add", label: "Añadir", path: "/anadir", requiresAuth: true },
   { icon: "delete", label: "Borrar", path: "/borrar", requiresAuth: true },

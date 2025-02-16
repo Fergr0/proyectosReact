@@ -18,7 +18,7 @@ function SignUpComponent() {
     e.preventDefault();
 
     try {
-      const user = await signUp(emailRegister, passwordRegister);
+      const user = await signUp(emailRegister, passwordRegister, displayName, photoURL);
       if (!user) {
         console.error("No se pudo registrar el usuario.");
         return;
@@ -31,7 +31,7 @@ function SignUpComponent() {
     } catch (error) {
       console.error("Error en el registro:", error.message);
     }
-    navigate("/prueba");
+    navigate("/ver");
   };
 
   return (

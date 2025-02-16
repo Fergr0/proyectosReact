@@ -17,7 +17,7 @@ function LoginComponent() {
     event.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/prueba");
+      navigate("/ver");
     } catch (error) {
       setError("Error al iniciar sesión. Verifica tus credenciales.");
       console.error(error.message);

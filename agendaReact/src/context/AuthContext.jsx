@@ -20,7 +20,6 @@ export function AuthProvider({ children }) {
   useEffect(() => {//Se ejecuta la función cuando el componente se monta
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
-        console.log("Usuario autenticado:", currentUser);
         setUser(currentUser);
       } else {
         console.log("Usuario no autenticado.");
@@ -31,9 +30,34 @@ export function AuthProvider({ children }) {
     return () => unsubscribe(); // Se cierra correctamente la suscripción
   }, []);
 
+
+  const getUserFromFirestore = async (uid) => {
+    try {
+      const userRef = doc(firestore, "users", uid);
+      const userSnap = await getDoc(userRef);
+      if (userSnap.exists()) {
+        return { uid, ...userSnap.data() }; // 🔹 Retorna el usuario con los datos de Firestore
+      } else {
+        console.log("Usuario no encontrado en Firestore");
+        return null;
+      }
+    } catch (error) {
+      console.error("Error al obtener usuario de Firestore:", error);
+      return null;
+    }
+  };
+
   const signUp = async (email, password) => {
     try {
       const response = await createUserWithEmailAndPassword(auth, email, password);
+
+      const userDoc = {
+        uid: response.user.uid,
+        email,
+        displayName: displayName || "Usuario",
+        photoURL: photoURL || "https://via.placeholder.com/100",
+      };
+      await setDoc(doc(firestore, "users", response.user.uid), userDoc);
       setUser(response.user); // Se actualiza el estado después de registrarse
       return response.user;
     } catch (error) {
@@ -62,6 +86,8 @@ export function AuthProvider({ children }) {
       console.error("Error al cerrar sesión:", error.message);
     }
   };
+
+
 
   return (
     <authContext.Provider value={{ signUp, login, logOut, user }}>
