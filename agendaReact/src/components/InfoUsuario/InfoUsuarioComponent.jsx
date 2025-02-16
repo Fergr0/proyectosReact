@@ -43,11 +43,11 @@ function InfoUsuarioComponent() {
             {currentUser ? (
                 <>
                     <img 
-                        src={currentUser.photoURL || "https://via.placeholder.com/100"} 
+                        src={currentUser.photoURL} 
                         alt="Profile"
                         className="profile-picture"
                     />
-                    <span className="user-name">{currentUser.displayName || "Usuario"}</span>
+                    <span className="user-name">{currentUser.displayName}</span>
                 </>
             ) : (
                 <p>Cargando usuario...</p>
