@@ -1,10 +1,13 @@
 import React, { use, useEffect, useState } from "react";
 import ContactoService from "../../services/contacto.service";
 import "../VerContactos/VerContactos.css";
+import Popup from "../Popup/Popup";
 
 function VerContactosComponent() {
 
   const [contactos, setContactos] = useState([]);
+  const [isPopupOpen, setIsPopupOpen] = useState(false); // Estado del popup
+  const [selectedContacto, setSelectedContacto] = useState(null); // Estado para el contacto seleccionado
 
   useEffect(() => {
     retrieveTutorials();
@@ -20,24 +23,59 @@ function VerContactosComponent() {
       });
   }
 
+  // Función para abrir el popup con un contacto específico
+  const handleOpenPopup = (contacto) => {
+    setSelectedContacto(contacto);
+    setIsPopupOpen(true);
+  };
+
+  // Función para cerrar el popup
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+    setSelectedContacto(null);
+  };
+
   return (
-    <div className="container">
-      <div className="row">
-        {contactos.map((contacto, index) => (
-          <div className="col-md-4" key={index}>
-            <div className="card mb-4">
-              <div className="card-body">
-                <h5 className="card-title">{contacto.nombre}</h5>
-                <h6 className="card-subtitle mb-2 text-muted">{contacto.apellido}</h6>
-                <p className="card-text">Ciudad: {contacto.ciudad}</p>
-                <p className="card-text">Calle: {contacto.calle}</p>
-                <p className="card-text">Código Postal: {contacto.codPostal}</p>
-                <p className="card-text">Cumpleaños: {contacto.cumpleanos}</p>
-              </div>
-            </div>
+    <div className="container mt-4">
+      <table className="table table-striped table-bordered">
+        <thead className="table-dark">
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellidos</th>
+          </tr>
+        </thead>
+        <tbody>
+          {contactos.map((contacto, index) => (
+            <tr key={index}>
+              <td>
+                <button onClick={() => handleOpenPopup(contacto)}>
+                  {contacto.nombre}
+                </button>
+              </td>
+              <td>
+                <button>
+                  {contacto.apellido}
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <Popup isOpen={isPopupOpen} onClose={handleClosePopup}>
+        {selectedContacto ? (
+          <div>
+            <h2>{selectedContacto.nombre} {selectedContacto.apellido}</h2>
+            <p><strong>Ciudad:</strong> {selectedContacto.ciudad}</p>
+            <p><strong>Calle:</strong> {selectedContacto.calle}</p>
+            <p><strong>Código Postal:</strong> {selectedContacto.codPostal}</p>
+            <p><strong>Cumpleaños:</strong> {selectedContacto.cumpleanos}</p>
           </div>
-        ))}
-      </div>
+        ) : (
+          <p>Cargando...</p>
+        )}
+      </Popup>
+
     </div>
   );
 }

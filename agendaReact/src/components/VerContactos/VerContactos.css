@@ -5,3 +5,8 @@ h2,p{
     position: relative;
     z-index: 1; 
 }
+
+button {
+    all: unset; /* Elimina todos los estilos heredados y predeterminados */
+    display: inline-block; /* Mantiene el comportamiento de botón */
+}
