@@ -70,6 +70,7 @@ function VerContactosComponent() {
             <p><strong>Calle:</strong> {selectedContacto.calle}</p>
             <p><strong>Código Postal:</strong> {selectedContacto.codPostal}</p>
             <p><strong>Cumpleaños:</strong> {selectedContacto.cumpleanos}</p>
+            <button className="btn btn-danger">Borrar</button>
           </div>
         ) : (
           <p>Cargando...</p>
