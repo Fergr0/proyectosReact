@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './InfoUsuarioComponent.css';
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/AuthContext";
 import { firestore } from '../../firebase';
 import { doc, getDoc } from "firebase/firestore"; 
 
@@ -9,12 +9,16 @@ function InfoUsuarioComponent() {
     const [uid, setUid] = useState(null); // Inicializo el uid con null
     const [currentUser, setCurrentUser] = useState(null); // Estado para almacenar el usuario de Firestore
 
-    // Establece el uid cuando el usuario está autenticado
+
     useEffect(() => {
-        if (user) {//Si el usuario está autenticado
-            setUid(user.uid);//Se establece el uid para poder hacer la consulta a Firestore
+        if (user) {
+            setUid(user.uid);
+        } else {
+            setUid(null); // Si el usuario cierra sesión, limpiamos el estado
+            setCurrentUser(null); // Limpiamos el estado del usuario
         }
-    }, [user]);//Se ejecuta cuando cambia el user
+    }, [user]);
+    
 
     // Obtiene los datos del usuario desde Firestore
     useEffect(() => {

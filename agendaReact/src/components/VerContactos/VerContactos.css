@@ -1,3 +1,7 @@
 h2,p{
     text-align: center;
 }
+.card {
+    position: relative;
+    z-index: 1; 
+}

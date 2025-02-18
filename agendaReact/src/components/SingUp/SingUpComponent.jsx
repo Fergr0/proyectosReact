@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { generateUserDocument } from "../../firebase.js";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/AuthContext.jsx";
 import "./SingUp.css";
 import { useNavigate } from "react-router-dom";
 

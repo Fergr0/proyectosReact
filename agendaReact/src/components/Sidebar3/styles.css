@@ -20,6 +20,7 @@
   display: flex;
   flex-direction: column;
   align-items: start;
+  z-index: 1100;
 }
 
 .sidebar-3.open {
@@ -35,7 +36,7 @@
   cursor: pointer;
   font-size: 24px;
   color: white;
-  z-index: 1000;
+  z-index: 2000; /* Asegura que esté por encima de todo */
 }
 
 .sidebar-3 nav {

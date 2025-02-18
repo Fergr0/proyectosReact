@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import SignUpComponent from "./components/SingUp/SingUpComponent";
 import LoginComponent from "./components/Login/LoginComponent";
 import Layout from "./components/Layout";
-import { AuthProvider } from "./context/authContext";
+import { AuthProvider } from "./context/AuthContext";
 import VerContactosComponent from "./components/VerContactos/VerContactosComponent";
 
 function App() {

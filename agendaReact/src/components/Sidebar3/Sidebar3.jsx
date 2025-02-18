@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./styles.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/AuthContext";
 
 const navItems = [
   { icon: "person_add", label: "SignUp", path: "/signUp", requiresAuth: false },
