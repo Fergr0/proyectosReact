@@ -1,24 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import InsertarProducto from './components/InsertarProducto'
-import { Routes, Route } from "react-router-dom";
-import ListarProductos from './components/ListarProductos'
-import EditarProductos from './components/EditarProductos'
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ProductProvider } from "../src/context/ProductContext"
+
+import InsertarProducto from "../src/components/InsertarProducto"
+import ListarProductos from "../src/components/ListarProductos";
+import EditarProductos from "../src/components/EditarProductos";
+import BarraProgreso from "../src/components/BarraProgreso";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<InsertarProducto />} />
-        <Route path="listado" element={<ListarProductos />} />
-        <Route path="editar/:id" element={<EditarProductos />} />
-      </Routes>
-    </>
-  )
+    <ProductProvider>
+        <BarraProgreso />
+        <Routes>
+          <Route path="/" element={<InsertarProducto />} />
+          <Route path="listado" element={<ListarProductos />} />
+          <Route path="editar/:id" element={<EditarProductos />} />
+        </Routes>
+    </ProductProvider>
+  );
 }
 
-export default App
+export default App;
