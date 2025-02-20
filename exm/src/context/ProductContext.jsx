@@ -15,16 +15,23 @@ export const ProductProvider = ({ children }) => {
       const response = await productoService.getAll();
       if (response && response.data) {
         setTotalProductos(response.data.length);
-      } else {
-        console.error("Respuesta de productos no válida:", response);
       }
     } catch (error) {
       console.error("Error al cargar productos:", error);
     }
   };
 
+  const eliminarProducto = async (id) => {
+    try {
+      await productoService.delete(id);
+      cargarProductos(); // Actualizar la lista de productos después de eliminar
+    } catch (error) {
+      console.error("Error al eliminar producto:", error);
+    }
+  };
+
   return (
-    <ProductContext.Provider value={{ totalProductos, cargarProductos }}>
+    <ProductContext.Provider value={{ totalProductos, cargarProductos, eliminarProducto }}>
       {children}
     </ProductContext.Provider>
   );

@@ -1,16 +1,14 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import productoService from "../services/producto.service";
-import { useNavigate } from "react-router-dom";
 import { ProductContext } from "../context/ProductContext";
 import "../Styles/styles.css";
 
-function ListarProductos() {
+function Segundo() {
   const [productos, setProductos] = useState([]);
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
   const [cantidadCompra, setCantidadCompra] = useState(1);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  const { eliminarProducto, cargarProductos } = useContext(ProductContext);
+  const { cargarProductos } = useContext(ProductContext);
 
   useEffect(() => {
     const fetchProductos = async () => {
@@ -26,26 +24,9 @@ function ListarProductos() {
     fetchProductos();
   }, []);
 
-  const Editar = (id) => {
-    navigate("/editar/" + id);
-  };
-
   const seleccionarProducto = (producto) => {
     setProductoSeleccionado(producto);
     setCantidadCompra(1);
-  };
-
-  const handleEliminar = async (id) => {
-    await eliminarProducto(id);
-    try {
-      const response = await productoService.getAll();
-      if (response && response.data) {
-        setProductos(response.data);
-        setProductoSeleccionado(null);
-      }
-    } catch (error) {
-      console.error("Error al actualizar la lista de productos:", error);
-    }
   };
 
   const handleCompra = async () => {
@@ -70,23 +51,22 @@ function ListarProductos() {
   return (
     <div className="container mt-4 d-flex">
       <div className="w-50">
+        <h3>Product's list</h3>
         {productos.length === 0 ? (
           <h2>No hay productos registrados</h2>
         ) : (
-          <table className="table table-striped table-bordered">
-            <thead className="table-dark">
+          <table className="table table-dark table-striped">
+            <thead>
               <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Marca</th>
-                <th scope="col">Activo</th>
+                <th>Name</th>
+                <th>Price</th>
               </tr>
             </thead>
             <tbody>
               {productos.map((producto, index) => (
                 <tr key={index} onClick={() => seleccionarProducto(producto)} style={{ cursor: "pointer" }}>
                   <td>{producto.name}</td>
-                  <td>{producto.brand}</td>
-                  <td>{producto.active ? "Sí" : "No"}</td>
+                  <td>{producto.price}</td>
                 </tr>
               ))}
             </tbody>
@@ -102,13 +82,14 @@ function ListarProductos() {
               </div>
             ) : (
               <>
-                <h3>{productoSeleccionado.name}</h3>
-                <p><strong>Marca:</strong> {productoSeleccionado.brand}</p>
-                <p><strong>Stock:</strong> {productoSeleccionado.stock}</p>
-                <p><strong>Precio:</strong> ${productoSeleccionado.price}</p>
-                <p><strong>Activo:</strong> {productoSeleccionado.active ? "Sí" : "No"}</p>
+                <h3>Product: {productoSeleccionado.name}</h3>
+                <p>
+                  <strong>Units in stock:</strong> {productoSeleccionado.stock} 
+                  {productoSeleccionado.stock > 0 ? <span className="text-success"> Units ok</span> : <span className="text-danger"> Out of stock</span>}
+                </p>
+                <p><strong>Price:</strong> ${productoSeleccionado.price}</p>
                 <div className="mb-3">
-                  <label className="form-label">Cantidad a comprar</label>
+                  <label className="form-label">Units to buy</label>
                   <input
                     type="number"
                     className="form-control"
@@ -118,13 +99,14 @@ function ListarProductos() {
                     onChange={(e) => setCantidadCompra(Number(e.target.value))}
                   />
                 </div>
-                <div className="d-flex gap-2">
-                  <button className="btn btn-primary" onClick={() => Editar(productoSeleccionado.id)}>Editar</button>
-                  <button className="btn btn-danger" onClick={() => handleEliminar(productoSeleccionado.id)}>Eliminar</button>
-                  <button className="btn btn-success" onClick={handleCompra} disabled={cantidadCompra > productoSeleccionado.stock || cantidadCompra <= 0}>
-                    Comprar
-                  </button>
-                </div>
+                <button
+                  className="btn btn-success"
+                  onClick={handleCompra}
+                  disabled={cantidadCompra > productoSeleccionado.stock || cantidadCompra <= 0}
+                >
+                  Comprar
+                </button>
+                <p><strong>Total:</strong> €{(productoSeleccionado.price * cantidadCompra).toFixed(2)}</p>
               </>
             )}
           </div>
@@ -134,4 +116,4 @@ function ListarProductos() {
   );
 }
 
-export default ListarProductos;
+export default Segundo;

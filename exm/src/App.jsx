@@ -6,6 +6,7 @@ import InsertarProducto from "../src/components/InsertarProducto"
 import ListarProductos from "../src/components/ListarProductos";
 import EditarProductos from "../src/components/EditarProductos";
 import BarraProgreso from "../src/components/BarraProgreso";
+import Segundo from "./components/Segundo";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<InsertarProducto />} />
           <Route path="listado" element={<ListarProductos />} />
           <Route path="editar/:id" element={<EditarProductos />} />
+          <Route path="segundo" element={<Segundo />} />
         </Routes>
     </ProductProvider>
   );
