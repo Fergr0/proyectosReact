@@ -7,10 +7,12 @@ import ListarProductos from "../src/components/ListarProductos";
 import EditarProductos from "../src/components/EditarProductos";
 import BarraProgreso from "../src/components/BarraProgreso";
 import Segundo from "./components/Segundo";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <ProductProvider>
+      <Navbar/>
         <BarraProgreso />
         <Routes>
           <Route path="/" element={<InsertarProducto />} />
