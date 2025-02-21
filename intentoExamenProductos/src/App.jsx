@@ -12,7 +12,7 @@ function App() {
 
   return (
     <>
-      <ProductList/>
+      <Conversor2/>
     </>
   )
 }
