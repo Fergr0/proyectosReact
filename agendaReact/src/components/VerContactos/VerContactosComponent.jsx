@@ -35,6 +35,18 @@ function VerContactosComponent() {
     setSelectedContacto(null);
   };
 
+    // Función para cerrar el popup
+    const handleDelete = (id) => {
+      ContactoService.delete(id)
+        .then(() => {
+          retrieveTutorials();
+          handleClosePopup();
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    };
+
   return (
     <div className="container mt-4">
       <table className="table table-striped table-bordered">
@@ -70,7 +82,8 @@ function VerContactosComponent() {
             <p><strong>Calle:</strong> {selectedContacto.calle}</p>
             <p><strong>Código Postal:</strong> {selectedContacto.codPostal}</p>
             <p><strong>Cumpleaños:</strong> {selectedContacto.cumpleanos}</p>
-            <button className="btn btn-danger">Borrar</button>
+            <button className="btn btn-danger" onClick={()=> handleDelete(selectedContacto.id)}>Borrar</button>
+            <button className="btn btn-info" onClick={()=> handleDelete(selectedContacto.id)}>Ver Tutoriales</button>
           </div>
         ) : (
           <p>Cargando...</p>

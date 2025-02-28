@@ -9,17 +9,17 @@ class ContactoService {
 //     return http.get(`/tutorials/${id}`);
 //   }
 
-//   create(data) {
-//     return http.post("/tutorials", data);
-//   }
+  create(data) {
+    return axios2.post("/usuarios", data);
+  }
 
 //   update(id, data) {
 //     return http.put(`/tutorials/${id}`, data);
 //   }
 
-//   delete(id) {
-//     return http.delete(`/tutorials/${id}`);
-//   }
+  delete(id) {
+    return axios2.delete(`/usuarios/${id}`);
+  }
 
 //   deleteAll() {
 //     return http.delete(`/tutorials`);
