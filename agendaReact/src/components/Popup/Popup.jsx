@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "../Popup/Popup.css"; // Importa estilos
 
-const Popup = ({ isOpen, onClose, children }) => {
+const Popup = ({ isOpen, onClose, children, side = false }) => {
   
   // Cerrar popup con la tecla ESC
   useEffect(() => {
@@ -26,7 +26,10 @@ const Popup = ({ isOpen, onClose, children }) => {
 
   return (
     <div className="popup-overlay" onClick={onClose}>
-      <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+      <div 
+        className={side ? "popup-content popup-side" : "popup-content"} 
+        onClick={(e) => e.stopPropagation()}
+      >
         <button className="popup-close" onClick={onClose}>✖</button>
         {children}
       </div>

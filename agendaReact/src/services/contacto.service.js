@@ -1,37 +1,27 @@
-import {axios2} from "../http-common";
+import { axios2 } from "../http-common";
 
 class ContactoService {
   getAll() {
     return axios2.get("/usuarios");
   }
 
-//   get(id) {
-//     return http.get(`/tutorials/${id}`);
-//   }
-
   create(data) {
     return axios2.post("/usuarios", data);
   }
-
-//   update(id, data) {
-//     return http.put(`/tutorials/${id}`, data);
-//   }
 
   delete(id) {
     return axios2.delete(`/usuarios/${id}`);
   }
 
-//   deleteAll() {
-//     return http.delete(`/tutorials`);
-//   }
-
-//  // findByTitle(title) {
-//  //   return http.get(`/tutorials?title=${title}`);
-//  // }
- 
-//  findByTitle(title) {
-//      return http.get(`/tutorials/title/${title}`);
-//    }
+  /**
+   * Asocia una lista de tutoriales a un usuario
+   * @param {string} userId - ID del usuario
+   * @param {string[]} tutorialIds - Lista de IDs de tutoriales a asociar
+   * @returns {Promise} - Promesa con la respuesta del servidor
+   */
+  assignTutorials(userId, tutorialIds) {
+    return axios2.put(`/usuarios/${userId}/tutoriales`, tutorialIds);
+  }
 }
 
 export default new ContactoService();
